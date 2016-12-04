@@ -9,6 +9,7 @@ import javax.swing.JTextArea;
 import ru.ifmo.cs.bcomp.Assembler;
 import ru.ifmo.cs.bcomp.CPU;
 import ru.ifmo.cs.bcomp.ui.GUI;
+import java.io.FileWriter;
 import ru.ifmo.cs.bcomp.ui.components.ActivateblePanel;
 import ru.ifmo.cs.bcomp.ui.components.ComponentManager;
 import ru.ifmo.cs.bcomp.ui.components.DisplayStyles;
@@ -33,6 +34,21 @@ public class AssemblerView extends ActivateblePanel {
       scroll.setBounds(1, 1, 600, 542);
       this.add(scroll);
       JButton button = new JButton("Компилировать");
+      JButton myBut = new JButton("Save");
+      myBut.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent actionEvent) {
+            try{
+               FileWriter file = new FileWriter("programm.asm");
+               file.write(AssemblerView.this.text.getText());
+               file.flush();
+            }catch (Exception e){
+
+            }
+         }
+      });
+      this.add(myBut);
+      myBut.setBounds(625,40,200,30);
       button.setForeground(DisplayStyles.COLOR_TEXT);
       button.setFont(DisplayStyles.FONT_COURIER_PLAIN_12);
       button.setBounds(625, 1, 200, 30);

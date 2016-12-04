@@ -13,6 +13,8 @@ import ru.ifmo.cs.bcomp.ui.components.DisplayStyles;
 import ru.ifmo.cs.bcomp.ui.components.RegisterView;
 import ru.ifmo.cs.elements.Register;
 
+import javax.rmi.CORBA.Util;
+
 public class InputRegisterView extends RegisterView {
 
    private final ComponentManager cmanager;
@@ -71,6 +73,23 @@ public class InputRegisterView extends RegisterView {
             case 97:
                InputRegisterView.this.setBit(1);
                break;
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+            case 'A':
+            case 'B':
+            case 'C':
+            case 'D':
+            case 'E':
+            case 'F':
+               setTetraValue(e.getKeyChar());
+
+               break;
             default:
                InputRegisterView.this.cmanager.keyPressed(e);
             }
@@ -94,7 +113,20 @@ public class InputRegisterView extends RegisterView {
          }
       });
    }
+   private void setTetraValue(char value){
+      if(('2' <= value) && (value <= '9'))
+         setTetraValue(value-32);
+      if(('A' <= value) && (value <= 'F') )
+         setTetraValue(value-39);
+   }
+   private void setTetraValue(int value){
+      while ((this.bitno+1) % 4 != 0)
+         moveLeft();
+      String tetra = Utils.toBinary(value, 4);
+      for(int i = 0; i < 4; i++)
+         setBit(tetra.charAt(i));
 
+   }
    private void setActiveBit(int bitno) {
       this.activeBitView.setValue(this.bitno = bitno);
       this.setValue();

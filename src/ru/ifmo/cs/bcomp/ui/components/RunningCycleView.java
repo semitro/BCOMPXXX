@@ -9,7 +9,7 @@ import ru.ifmo.cs.bcomp.ui.components.DisplayStyles;
 public class RunningCycleView extends BCompComponent {
 
    private CPU cpu;
-   private static final String[] cycles = new String[]{"Выборка команды", "Выбора адреса", "Исполнение", "Прерывание", "Пультовая операция", "Программа"};
+   private static final String[] cycles = new String[]{"Выборка команды", "Выбора адреса", "Экзекуция", "Прерывание", "Пультовая операция", "Программа"};
    private final JLabel[] labels;
    private RunningCycle lastcycle;
    private int lastprogram;
